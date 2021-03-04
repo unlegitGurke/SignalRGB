@@ -1,0 +1,111 @@
+<head>
+    <title>Custom Gradient</title>
+    <meta description="Custom Gradient Effect with 5 Colors" />
+    <meta publisher="unlegit_Gurke + KukkiNekko" />
+
+    <meta property="color1"
+          label="Color 1"
+          type="color"
+          min="0"
+          max="360"
+          default="#ccff00" />
+
+    <meta property="color2"
+          label="Color 2"
+          type="color"
+          min="0"
+          max="360"
+          default="#ccff00" />
+
+    <meta property="color3"
+          label="Color 3"
+          type="color"
+          min="0"
+          max="360"
+          default="#ccff00" />
+
+    <meta property="color4"
+          label="Color 4"
+          type="color"
+          min="0"
+          max="360"
+          default="#ccff00" />
+
+    <meta property="color5"
+          label="Color 5"
+          type="color"
+          min="0"
+          max="360"
+          default="#ccff00" />
+
+    <meta property="rot"
+          label="Rotation"
+          type="number"
+          min="-360"
+          max="360"
+          default="0" />
+
+    <meta property="X"
+          label="X - Offset"
+          type="number"
+          min="-360"
+          max="360"
+          default="0" />
+
+    <meta property="Y"
+          label="Y - Offset"
+          type="number"
+          min="-360"
+          max="360"
+          default="0" />
+
+</head>
+
+<body style="margin: 0; padding: 0;">
+    <canvas id="exCanvas" width="320" height="200"></canvas>
+</body>
+
+<script>
+    var c = document.getElementById("exCanvas");
+    var ctx = c.getContext("2d");
+    var width = 320;
+    var height = 200;
+    var color1 = 0;
+    var color2 = 0;
+    var color3 = 0;
+    var color4 = 0;
+    var color5 = 0;
+    var rot = 0;
+    var X = 0;
+    var Y = 0;
+    function update() {
+
+        ctx.fillStyle = "hsl(0, 100%, 0%)";
+        ctx.fillRect(0, 0, 360, 360);
+
+        draw();
+
+        window.requestAnimationFrame(update);
+    }
+    function draw() {
+
+        var grd = ctx.createLinearGradient(0 + X, rot + Y, 360 + X, 360 - rot + Y);
+
+        grd.addColorStop(0, color1);
+        grd.addColorStop(0.25, color2);
+        grd.addColorStop(0.5, color3);
+        grd.addColorStop(0.75, color4);
+        grd.addColorStop(1, color5);
+
+
+        //ctx.translate(canvas.width/2, canvas.height/2);
+        //ctx.rotate(0);
+
+        ctx.fillStyle = grd;
+        ctx.fillRect(0, 0, 360, 360);
+
+
+    }
+    setInterval(update, 1000);
+    window.requestAnimationFrame(update);
+</script>
